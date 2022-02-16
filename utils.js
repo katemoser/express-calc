@@ -1,3 +1,5 @@
+"use strict";
+
 const { BadRequestError } = require("./expressError");
 
 
@@ -15,7 +17,7 @@ function convertStrNums(numString) {
 }
 
 function intifyOrError(str){
-  n = parseInt(str);
+  const n = parseInt(str);
   if (!n){
     throw new BadRequestError(`${str} is not a number`);
   }

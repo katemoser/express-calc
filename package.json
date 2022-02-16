@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/katemoser/express-calc#readme",
   "dependencies": {
+    "axios": "^0.26.0",
     "express": "^5.0.0-beta.1"
   }
 }

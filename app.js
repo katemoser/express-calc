@@ -1,8 +1,11 @@
+"use strict";
 /** Simple demo Express app. */
 
 const express = require("express");
+const axios = require("axios");
 const { STATUS_CODES } = require("http");
 const app = express();
+
 
 // useful error class to throw
 const { NotFoundError } = require("./expressError");
@@ -18,10 +21,31 @@ const { findMode } = require("./stats")
 
 const MISSING = "Expected key `nums` with comma-separated list of numbers.";
 
+/** finds mean, mode, median of nums in qs:
+ * returns {
+  operation: "all",
+  mean: 12
+  median: 10,
+  mode: 8}
 
+ */
+app.get("/all", function (req, res) {
+
+  const nums = convertStrNums(req.query.nums);
+
+  return res.json({
+    response:{
+      operations: "all",
+      mode: findMode(nums),
+      mean: findMean(nums),
+      median: findMedian(nums),
+    }
+  });
+
+});
 
 /** Finds mean of nums in qs: returns {operation: "mean", result } */
-app.get("/mean/", function (req, res) {
+app.get("/mean", function (req, res) {
 
   //call function to turn string into array of nums
   const nums = convertStrNums(req.query.nums);
